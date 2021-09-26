@@ -4,3 +4,9 @@
 德·卡斯特里奥算法（De Casteljau's algorithm）实现
 
 reference: https://zh.javascript.info/bezier-curve
+
+start with
+```shell script
+npm install
+npm run dev
+```
