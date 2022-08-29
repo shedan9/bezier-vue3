@@ -47,6 +47,7 @@
     />
 
     <path
+      v-show="t > 0"
       ref="path"
       :d="bezierPath"
       stroke="#db585c"
@@ -68,12 +69,13 @@
 
 <script>
 
-  import { ref, watch, toRefs, computed, nextTick } from 'vue'
+  import { ref, watch, computed, nextTick } from 'vue'
 
   function drawLine(refT, refDashOffset, pathLength) {
     let fn = (resolve) => {
-      refT.value += 0.005;
-      refDashOffset.value -= pathLength * 0.005;
+      const tStep = 0.002;
+      refT.value += tStep;
+      refDashOffset.value -= pathLength * tStep;
       if (refT.value <= 1) {
         setTimeout(() => fn(resolve), 17);
       } else {
@@ -132,7 +134,7 @@
   }
 
   export default {
-    setup(props, { emit }) {
+    setup() {
 
       const width = 1000;
       const height = 600;
@@ -219,6 +221,7 @@
       });
 
       return {
+        t,
         width,
         height,
         dotAdd,
